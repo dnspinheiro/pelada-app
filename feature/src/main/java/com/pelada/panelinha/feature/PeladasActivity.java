@@ -12,7 +12,7 @@ import android.view.View;
 
 import com.pelada.panelinha.feature.adapter.PeladaAdapter;
 import com.pelada.panelinha.feature.modelo.Pelada;
-import com.pelada.panelinha.feature.modelo.Retorno;
+import com.pelada.panelinha.feature.modelo.RetornoPelada;
 import com.pelada.panelinha.feature.services.RetrofitConfig;
 
 import java.util.ArrayList;
@@ -49,31 +49,31 @@ public class PeladasActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
             }
         });
     }
 
     private void getPeladas() {
         Log.i("PeladaActivity", "chegou no get Peladas");
-        Call<Retorno> call = new RetrofitConfig().getPeladaService().buscarPeladas();
-        call.enqueue(new Callback<Retorno>() {
+        Call<RetornoPelada> call = new RetrofitConfig().getPeladaService().buscarPeladas();
+        call.enqueue(new Callback<RetornoPelada>() {
             @Override
-            public void onResponse(Call<Retorno> call, Response<Retorno> response) {
-                Retorno retorno = response.body();
-                peladas = retorno.getResult();
+            public void onResponse(Call<RetornoPelada> call, Response<RetornoPelada> response) {
+                RetornoPelada retornoPelada = response.body();
+                peladas = retornoPelada.getResult();
                 // specify an adapter (see also next example)
                 mAdapter = new PeladaAdapter(peladas);
                 recyclerView.setAdapter(mAdapter);
 //                resposta.setText(peladas.toString());
-                Log.i("PeladaActivity", retorno.getResult().toString());
-                Log.i("PeladaActivity", retorno.getMessage());
+                Log.i("PeladaActivity", retornoPelada.getResult().toString());
+                Log.i("PeladaActivity", retornoPelada.getMessage());
             }
 
             @Override
-            public void onFailure(Call<Retorno> call, Throwable t) {
-                Log.e("PeladaService   ", "Erro ao buscar o Peladas:" + t.getMessage());
+            public void onFailure(Call<RetornoPelada> call, Throwable t) {
+                Log.e("PeladaService   ", "Erro ao buscar as Peladas:" + t.getMessage());
             }
         });
     }
