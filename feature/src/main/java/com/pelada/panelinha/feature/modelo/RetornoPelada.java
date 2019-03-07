@@ -2,7 +2,7 @@ package com.pelada.panelinha.feature.modelo;
 
 import java.util.ArrayList;
 
-public class Retorno {
+public class RetornoPelada {
 
     private String type;
     private Integer status;
