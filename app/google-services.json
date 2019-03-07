@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "844456545183",
+    "firebase_url": "https://pelada-85ed8.firebaseio.com",
+    "project_id": "pelada-85ed8",
+    "storage_bucket": "pelada-85ed8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:844456545183:android:7697c6d542fd8aec",
+        "android_client_info": {
+          "package_name": "com.pelada.panelinha.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "844456545183-kn4ksnpongt890e85ufcb4cpd9io6vl6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.pelada.panelinha.app",
+            "certificate_hash": "6ccb75309fee866d8445f82f7fc5a18f36cfdd1c"
+          }
+        },
+        {
+          "client_id": "844456545183-irc1apqoto3djlh7e1uhonhnkl32c06n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCZRd05xssMpPIBijroqqhTMybzvWe3DXc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "844456545183-irc1apqoto3djlh7e1uhonhnkl32c06n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
