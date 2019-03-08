@@ -37,6 +37,9 @@ public class PeladaAdapter extends RecyclerView.Adapter<PeladaAdapter.MyViewHold
         mDataset = myDataset;
     }
 
+    public PeladaAdapter() {
+    }
+
     @NonNull
     @Override
     public PeladaAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
@@ -59,4 +62,22 @@ public class PeladaAdapter extends RecyclerView.Adapter<PeladaAdapter.MyViewHold
     public int getItemCount() {
         return mDataset.size();
     }
+
+//    public Pelada getItem(int position) {
+//        return mDataset.get(position);
+//    }
+//
+//    public void removeItem(int position) {
+//        mDataset.remove(position);
+//        notifyItemRemoved(position);
+//    }
+//
+//    public void restoreItem(Pelada item, int position) {
+//        mDataset.add(position, item);
+//        notifyItemInserted(position);
+//    }
+//
+//    public ArrayList<Pelada> getData() {
+//        return mDataset;
+//    }
 }

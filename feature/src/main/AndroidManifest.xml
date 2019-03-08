@@ -25,7 +25,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".NovaPelada"
+        <activity
+            android:name=".NovaPelada"
             android:parentActivityName="com.pelada.panelinha.feature.PeladasActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
