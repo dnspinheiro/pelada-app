@@ -48,8 +48,6 @@ public class PeladasActivity extends AppCompatActivity {
         recyclerView = (RecyclerView) findViewById(R.id.rv_peladas);
         recyclerView.setHasFixedSize(true);
         coordinatorLayout = findViewById(R.id.coordinatorLayout);
-//        layoutManager = new LinearLayoutManager(this);
-//        recyclerView.setLayoutManager(layoutManager);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {

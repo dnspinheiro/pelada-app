@@ -43,9 +43,10 @@ public class PeladaAdapter extends RecyclerView.Adapter<PeladaAdapter.MyViewHold
             Log.i("peladaactivity", "chegou no click");
             Pelada item = mDataset.get(getLayoutPosition());
             Intent intent = new Intent(context, JogadoresActivity.class);
-            Bundle bundle = new Bundle();
-            bundle.putSerializable("pelada", item);
-            intent.putExtras(bundle);
+//            Bundle bundle = new Bundle();
+//            bundle.putSerializable("pelada", item);
+            Log.i("PeladaAdapter", "peladaParse"+item);
+            intent.putExtra("pelada", item);
             context.startActivity(intent);
         }
     }

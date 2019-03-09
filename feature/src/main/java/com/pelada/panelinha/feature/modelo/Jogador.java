@@ -6,6 +6,7 @@ public class Jogador {
     private String nome;
     private String nivel;
     private String posicao;
+    private boolean participa;
 
     public String getNome() {
         return nome;
@@ -37,5 +38,13 @@ public class Jogador {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public boolean getParticipa() {
+        return participa;
+    }
+
+    public void setParticipa(boolean participa) {
+        this.participa = participa;
     }
 }
