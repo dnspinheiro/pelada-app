@@ -6,4 +6,6 @@
     <string name="txt_local">Local:</string>
     <string name="txt_hora">Hora:</string>
     <string name="txt_quant">Quantidade:</string>
+    <string name="txt_nivel">Nível:</string>
+    <string name="txt_posicao">Posição:</string>
 </resources>

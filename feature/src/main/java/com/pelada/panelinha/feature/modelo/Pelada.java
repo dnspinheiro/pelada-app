@@ -1,6 +1,9 @@
 package com.pelada.panelinha.feature.modelo;
 
-public class Pelada {
+import java.io.Serializable;
+
+public class Pelada implements Serializable {
+    private String id;
     private String nome;
     private String hora;
     private String local;
@@ -36,5 +39,13 @@ public class Pelada {
 
     public void setQuantidade(String quantidade) {
         this.quantidade = quantidade;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

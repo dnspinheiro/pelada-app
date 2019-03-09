@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">panelinha</string>
     <string name="title_activity_peladas">Peladas</string>
+    <string name="title_activity_jogadores">Jogadores</string>
 </resources>

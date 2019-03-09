@@ -1,5 +1,8 @@
 package com.pelada.panelinha.feature.adapter;
 
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -8,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.pelada.panelinha.feature.JogadoresActivity;
 import com.pelada.panelinha.feature.R;
 import com.pelada.panelinha.feature.modelo.Pelada;
 
@@ -15,8 +19,9 @@ import java.util.ArrayList;
 
 public class PeladaAdapter extends RecyclerView.Adapter<PeladaAdapter.MyViewHolder> {
     private ArrayList<Pelada> mDataset;
+    private Context context;
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public TextView tv_nome;
         public TextView tv_local;
         public TextView tv_hora;
@@ -30,11 +35,24 @@ public class PeladaAdapter extends RecyclerView.Adapter<PeladaAdapter.MyViewHold
             tv_local = itemView.findViewById(R.id.item_local);
             tv_hora = itemView.findViewById(R.id.item_hora);
             tv_quant = itemView.findViewById(R.id.item_quant);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            Log.i("peladaactivity", "chegou no click");
+            Pelada item = mDataset.get(getLayoutPosition());
+            Intent intent = new Intent(context, JogadoresActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("pelada", item);
+            intent.putExtras(bundle);
+            context.startActivity(intent);
         }
     }
 
-    public PeladaAdapter(ArrayList myDataset) {
+    public PeladaAdapter(ArrayList myDataset, Context context) {
         mDataset = myDataset;
+        this.context = context;
     }
 
     public PeladaAdapter() {

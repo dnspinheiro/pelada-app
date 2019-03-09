@@ -16,4 +16,8 @@ public class RetrofitConfig {
     public PeladaService getPeladaService() {
         return this.retrofit.create(PeladaService.class);
     }
+
+    public JogadorService getJogadorService() {
+        return this.retrofit.create(JogadorService.class);
+    }
 }
