@@ -19,6 +19,7 @@ import android.view.ViewGroup;
 
 import android.widget.TextView;
 
+import com.pelada.panelinha.feature.modelo.Estatistica;
 import com.pelada.panelinha.feature.modelo.Pelada;
 
 public class TimesActivity extends AppCompatActivity {
@@ -32,7 +33,7 @@ public class TimesActivity extends AppCompatActivity {
      * {@link android.support.v4.app.FragmentStatePagerAdapter}.
      */
     private SectionsPagerAdapter mSectionsPagerAdapter;
-    private int times;
+    private Estatistica estatistica = new Estatistica();
 
     /**
      * The {@link ViewPager} that will host the section contents.
@@ -47,8 +48,8 @@ public class TimesActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        times = getIntent().getIntExtra("times",3);
-        Log.i("JogadoresActivity", "timesPut" + times);
+        estatistica = (Estatistica) getIntent().getSerializableExtra("estatistica2");
+        Log.i("JogadoresActivity", "timesPut " + estatistica.getQuantTimes());
 
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
@@ -144,7 +145,7 @@ public class TimesActivity extends AppCompatActivity {
         @Override
         public int getCount() {
             // Show 3 total pages.
-            return times;
+            return estatistica.getQuantTimes();
         }
     }
 }

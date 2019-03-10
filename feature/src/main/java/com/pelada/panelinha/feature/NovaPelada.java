@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.pelada.panelinha.feature.adapter.PeladaAdapter;
@@ -43,7 +44,6 @@ public class NovaPelada extends AppCompatActivity {
         final Button button = findViewById(R.id.button_id);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Log.i("NovaPeladaActivity", "chegou no post Pelada");
                 String nome = edt_nome.getText().toString();
                 String local = edt_local.getText().toString();
                 String hora = edt_hora.getText().toString();
@@ -54,16 +54,16 @@ public class NovaPelada extends AppCompatActivity {
                 pelada.setNome(nome);
                 pelada.setQuantidade(quant);
 
-                final String json  = gson.toJson(pelada);
+                final String json = gson.toJson(pelada);
                 RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), json);
                 Call<RetornoPelada> call = new RetrofitConfig().getPeladaService().postPelada(body);
                 call.enqueue(new Callback<RetornoPelada>() {
                     @Override
                     public void onResponse(Call<RetornoPelada> call, Response<RetornoPelada> response) {
-                        RetornoPelada retornoPelada = response.body();
-                        Log.i("NovaPeladaActivity", retornoPelada.getResult().toString());
-                        Log.i("NovaPeladaActivity", retornoPelada.getMessage());
-                        startActivity(new Intent(NovaPelada.this, PeladasActivity.class));
+                        RetornoPelada retorno = response.body();
+                        Log.i("NovaPeladaActivity", retorno.getResult().toString());
+                        Toast.makeText(getApplicationContext(),retorno.getMessage(), Toast.LENGTH_SHORT).show();
+                        finish();
                     }
 
                     @Override

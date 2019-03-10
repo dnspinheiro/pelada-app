@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.pelada.panelinha.feature.JogadoresActivity;
 import com.pelada.panelinha.feature.R;
+import com.pelada.panelinha.feature.modelo.Estatistica;
 import com.pelada.panelinha.feature.modelo.Pelada;
 
 import java.util.ArrayList;
@@ -42,11 +43,10 @@ public class PeladaAdapter extends RecyclerView.Adapter<PeladaAdapter.MyViewHold
         public void onClick(View v) {
             Log.i("peladaactivity", "chegou no click");
             Pelada item = mDataset.get(getLayoutPosition());
+            Estatistica estatistica = new Estatistica();
+            estatistica.setPelada(item);
             Intent intent = new Intent(context, JogadoresActivity.class);
-//            Bundle bundle = new Bundle();
-//            bundle.putSerializable("pelada", item);
-            Log.i("PeladaAdapter", "peladaParse"+item);
-            intent.putExtra("pelada", item);
+            intent.putExtra("estatistica", estatistica);
             context.startActivity(intent);
         }
     }

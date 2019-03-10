@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.pelada.panelinha.feature.modelo.Jogador;
@@ -42,7 +43,7 @@ public class NovoJogador extends AppCompatActivity {
                 jogador.setPosicao(posicao);
                 jogador.setNome(nome);
 
-                final String json  = gson.toJson(jogador);
+                final String json = gson.toJson(jogador);
                 RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), json);
                 Call<RetornoJogador> call = new RetrofitConfig().getJogadorService().postJogador(body);
                 call.enqueue(new Callback<RetornoJogador>() {
@@ -50,8 +51,9 @@ public class NovoJogador extends AppCompatActivity {
                     public void onResponse(Call<RetornoJogador> call, Response<RetornoJogador> response) {
                         RetornoJogador retorno = response.body();
                         Log.i("NovoJogadorActivity", retorno.getResult().toString());
-                        Log.i("NovoJogadorActivity", retorno.getMessage());
-                        startActivity(new Intent(NovoJogador.this, JogadoresActivity.class));
+                        Toast.makeText(getApplicationContext(),retorno.getMessage(), Toast.LENGTH_SHORT).show();
+//                        startActivity(new Intent(NovoJogador.this, JogadoresActivity.class));
+                        finish();
                     }
 
                     @Override

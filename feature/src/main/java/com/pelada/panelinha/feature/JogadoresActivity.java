@@ -15,14 +15,19 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import com.pelada.panelinha.feature.adapter.JogadorAdapter;
+import com.pelada.panelinha.feature.modelo.Estatistica;
 import com.pelada.panelinha.feature.modelo.Jogador;
 import com.pelada.panelinha.feature.modelo.Pelada;
 import com.pelada.panelinha.feature.modelo.RetornoJogador;
+import com.pelada.panelinha.feature.modelo.Time;
 import com.pelada.panelinha.feature.services.RetrofitConfig;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -31,7 +36,7 @@ import retrofit2.Response;
 public class JogadoresActivity extends AppCompatActivity {
 
     private ArrayList<Jogador> jogadores;
-    private Pelada pelada;
+    private Estatistica estatistica;
 
     private RecyclerView recyclerView;
     private JogadorAdapter mAdapter;
@@ -45,8 +50,8 @@ public class JogadoresActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        pelada = (Pelada) getIntent().getSerializableExtra("pelada");
-        Log.i("JogadoresActivity", "peladaParse" + pelada.getNome());
+        estatistica = (Estatistica) getIntent().getSerializableExtra("estatistica");
+        Log.i("JogadoresActivity", "peladaParse" + estatistica.getPelada().getNome());
 
         getJogadores();
         recyclerView = (RecyclerView) findViewById(R.id.rv_jogadores);
@@ -69,6 +74,7 @@ public class JogadoresActivity extends AppCompatActivity {
             public void onResponse(Call<RetornoJogador> call, Response<RetornoJogador> response) {
                 RetornoJogador retorno = response.body();
                 jogadores = retorno.getResult();
+
                 for (Jogador j : jogadores) {
                     j.setParticipa(false);
                 }
@@ -146,17 +152,34 @@ public class JogadoresActivity extends AppCompatActivity {
         if (i == R.id.action_sortear) {
 
             int quant = jogadores.size();
-            int quantJogTime = 6;
             int quantTimes;
-            if (quant % quantJogTime == 0) {
-                quantTimes = quant / quantJogTime;
+            if (quant % estatistica.getQuantJogTimes() == 0) {
+                quantTimes = quant / estatistica.getQuantJogTimes();
             } else {
-                quantTimes = quant / quantJogTime + 1;
+                quantTimes = quant / estatistica.getQuantJogTimes() + 1;
             }
 
+            estatistica.setQuantTimes(quantTimes);
+
+            Collections.shuffle(jogadores);
+            Time time = new Time();
+            ArrayList<Time> times = new ArrayList<>();
+            for (int index = 1; index <= estatistica.getQuantTimes(); index++) {
+                time.setNome("Time 0" + index);
+                int ultimo = estatistica.getQuantTimes() * index;
+                if (ultimo > jogadores.size()) {
+                    ultimo = jogadores.size();
+                }
+                time.setJogadores(new ArrayList<Jogador>(jogadores.subList(estatistica.getQuantTimes() * index, ultimo)));
+                times.add(time);
+                Log.i("timesParse", "quant times" + times.size());
+            }
+
+            estatistica.setTimes(times);
+
             Intent intent = new Intent(JogadoresActivity.this, TimesActivity.class);
-            Log.i("PeladaAdapter", "peladaParse"+quantTimes);
-            intent.putExtra("times", quantTimes);
+            Log.i("PeladaAdapter", "peladaParse" + quantTimes);
+            intent.putExtra("estatistica2", estatistica);
             startActivity(intent);
 
             return true;

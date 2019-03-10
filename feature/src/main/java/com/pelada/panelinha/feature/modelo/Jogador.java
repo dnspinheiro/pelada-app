@@ -1,6 +1,8 @@
 package com.pelada.panelinha.feature.modelo;
 
-public class Jogador {
+import java.io.Serializable;
+
+public class Jogador implements Serializable {
 
     private String id;
     private String nome;

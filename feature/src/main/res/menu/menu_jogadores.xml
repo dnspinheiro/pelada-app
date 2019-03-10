@@ -6,4 +6,5 @@
         android:icon="@drawable/ic_stat_delete_sweep"
         android:title="@string/txt_sortear"
         app:showAsAction="ifRoom"/>
+    <!--<include layout="@layout/progress_button"/>-->
 </menu>

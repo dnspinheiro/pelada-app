@@ -34,7 +34,8 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.pelada.panelinha.feature.PeladasActivity" />
         </activity>
-        <activity android:name=".NovoJogador">
+        <activity android:name=".NovoJogador"
+            android:parentActivityName=".JogadoresActivity">>
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.pelada.panelinha.feature.JogadoresActivity" />
