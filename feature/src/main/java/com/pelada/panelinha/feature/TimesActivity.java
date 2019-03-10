@@ -17,10 +17,17 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.pelada.panelinha.feature.modelo.Estatistica;
+import com.pelada.panelinha.feature.modelo.Jogador;
 import com.pelada.panelinha.feature.modelo.Pelada;
+import com.pelada.panelinha.feature.modelo.Time;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class TimesActivity extends AppCompatActivity {
 
@@ -52,7 +59,6 @@ public class TimesActivity extends AppCompatActivity {
         Log.i("JogadoresActivity", "timesPut " + estatistica.getQuantTimes());
 
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
-
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
@@ -99,6 +105,7 @@ public class TimesActivity extends AppCompatActivity {
          * fragment.
          */
         private static final String ARG_SECTION_NUMBER = "section_number";
+        private static final String ARG_ESTATISTICA = "estatistica_parse";
 
         public PlaceholderFragment() {
         }
@@ -107,10 +114,14 @@ public class TimesActivity extends AppCompatActivity {
          * Returns a new instance of this fragment for the given section
          * number.
          */
-        public static PlaceholderFragment newInstance(int sectionNumber) {
+        public static PlaceholderFragment newInstance(int sectionNumber, Estatistica estatistica) {
+            ArrayList<Jogador> jogadores = estatistica.getTimes().get(sectionNumber - 1).getJogadores();
+            Log.i("TimesActivity", "size jogadores" + jogadores.size());
+
             PlaceholderFragment fragment = new PlaceholderFragment();
             Bundle args = new Bundle();
             args.putInt(ARG_SECTION_NUMBER, sectionNumber);
+            args.putSerializable(ARG_ESTATISTICA, jogadores);
             fragment.setArguments(args);
             return fragment;
         }
@@ -120,7 +131,12 @@ public class TimesActivity extends AppCompatActivity {
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
             TextView textView = (TextView) rootView.findViewById(R.id.section_label);
-            textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
+//            textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
+
+            List<Jogador> jogadores = (List<Jogador>) getArguments().getSerializable(ARG_ESTATISTICA);
+            ListView listaJogadores = (ListView) rootView.findViewById(R.id.lv_jogTimes);
+            ArrayAdapter<Jogador> adapter = new ArrayAdapter<Jogador>(rootView.getContext(),android.R.layout.simple_list_item_1, jogadores);
+            listaJogadores.setAdapter(adapter);
             return rootView;
         }
     }
@@ -139,12 +155,11 @@ public class TimesActivity extends AppCompatActivity {
         public Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
-            return PlaceholderFragment.newInstance(position + 1);
+            return PlaceholderFragment.newInstance(position + 1, estatistica);
         }
 
         @Override
         public int getCount() {
-            // Show 3 total pages.
             return estatistica.getQuantTimes();
         }
     }
