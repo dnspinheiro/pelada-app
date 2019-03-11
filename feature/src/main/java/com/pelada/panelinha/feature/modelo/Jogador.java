@@ -10,6 +10,22 @@ public class Jogador implements Serializable {
     private String posicao;
     private boolean participa;
 
+    public Jogador(String nome, String nivel, String posicao){
+        this.nome = nome;
+        this.nivel = nivel;
+        this.posicao = posicao;
+    }
+
+    public Jogador(Jogador jogador){
+        this.participa = jogador.getParticipa();
+        this.posicao = jogador.getPosicao();
+        this.nivel = jogador.getNivel();
+        this.nome = jogador.getNome();
+        this.id = jogador.getId();
+    }
+
+    public Jogador(){}
+
     public String getNome() {
         return nome;
     }
@@ -48,5 +64,10 @@ public class Jogador implements Serializable {
 
     public void setParticipa(boolean participa) {
         this.participa = participa;
+    }
+
+    @Override
+    public String toString() {
+        return " " + nome;
     }
 }

@@ -62,7 +62,7 @@ public class JogadorAdapter extends RecyclerView.Adapter<JogadorAdapter.MyViewHo
         myViewHolder.tv_posicao.setText(mDataset.get(i).getPosicao());
         myViewHolder.chk_participa.setChecked(mDataset.get(i).getParticipa());
 
-        myViewHolder.chk_participa.setOnCheckedChangeListener(null);
+//        myViewHolder.chk_participa.setOnCheckedChangeListener(null);
         myViewHolder.chk_participa.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {

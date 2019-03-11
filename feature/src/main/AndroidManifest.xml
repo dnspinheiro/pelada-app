@@ -34,12 +34,18 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.pelada.panelinha.feature.PeladasActivity" />
         </activity>
-        <activity android:name=".NovoJogador"
-            android:parentActivityName=".JogadoresActivity">>
+        <activity
+            android:name=".NovoJogador"
+            android:parentActivityName=".JogadoresActivity">
+            >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.pelada.panelinha.feature.JogadoresActivity" />
         </activity>
+        <activity
+            android:name=".EstatisticaActivity"
+            android:label="@string/title_activity_estatistica"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

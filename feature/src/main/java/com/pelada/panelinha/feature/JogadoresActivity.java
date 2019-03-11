@@ -28,6 +28,7 @@ import com.pelada.panelinha.feature.services.RetrofitConfig;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -151,7 +152,20 @@ public class JogadoresActivity extends AppCompatActivity {
         int i = item.getItemId();
         if (i == R.id.action_sortear) {
 
-            int quant = jogadores.size();
+            //jogaodres ativos
+            ArrayList<Jogador> jogadoresTemp = new ArrayList<>(jogadores);
+            Log.i("JogadorActivity", "size " + jogadoresTemp.size());
+            for (int j = 0; j < jogadoresTemp.size(); j++) {
+                Log.i("JogadorActivity", "participa " + jogadoresTemp.get(j).getParticipa());
+                if (jogadoresTemp.get(j).getParticipa()) {
+                    Log.i("JogadorActivity", "true " + jogadoresTemp.get(j).getNome());
+                } else {
+                    Log.i("JogadorActivity", "false" +jogadoresTemp.get(j).getNome());
+                    jogadoresTemp.remove(j);
+                }
+            }
+
+            int quant = jogadoresTemp.size();
             int quantTimes;
             if (quant % estatistica.getQuantJogTimes() == 0) {
                 quantTimes = quant / estatistica.getQuantJogTimes();
@@ -161,24 +175,24 @@ public class JogadoresActivity extends AppCompatActivity {
 
             estatistica.setQuantTimes(quantTimes);
 
-            Collections.shuffle(jogadores);
-            Time time = new Time();
+            Collections.shuffle(jogadoresTemp);
             ArrayList<Time> times = new ArrayList<>();
+            Time time;
             for (int index = 1; index <= estatistica.getQuantTimes(); index++) {
+                time = new Time();
                 time.setNome("Time 0" + index);
-                int ultimo = estatistica.getQuantTimes() * index;
-                if (ultimo > jogadores.size()) {
-                    ultimo = jogadores.size();
+                int ultimo = estatistica.getQuantJogTimes() * index;
+                if (ultimo > jogadoresTemp.size()) {
+                    ultimo = jogadoresTemp.size();
                 }
-                time.setJogadores(new ArrayList<Jogador>(jogadores.subList(estatistica.getQuantTimes() * index, ultimo)));
+                time.setJogadores(new ArrayList<Jogador>(jogadoresTemp.subList(estatistica.getQuantJogTimes() * (index - 1), ultimo)));
                 times.add(time);
-                Log.i("timesParse", "quant times" + times.size());
+                Log.i("JogadorActivity", "quant times" + times.size());
             }
 
             estatistica.setTimes(times);
 
             Intent intent = new Intent(JogadoresActivity.this, TimesActivity.class);
-            Log.i("PeladaAdapter", "peladaParse" + quantTimes);
             intent.putExtra("estatistica2", estatistica);
             startActivity(intent);
 

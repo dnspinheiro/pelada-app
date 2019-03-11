@@ -1,5 +1,7 @@
 package com.pelada.panelinha.feature.services;
 
+import com.pelada.panelinha.feature.modelo.Estatistica;
+
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -19,5 +21,9 @@ public class RetrofitConfig {
 
     public JogadorService getJogadorService() {
         return this.retrofit.create(JogadorService.class);
+    }
+
+    public EstatisticaService getEstatisticaService() {
+        return this.retrofit.create(EstatisticaService.class);
     }
 }
