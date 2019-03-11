@@ -53,7 +53,7 @@ public class NovoJogador extends AppCompatActivity {
                         Log.i("NovoJogadorActivity", retorno.getResult().toString());
                         Toast.makeText(getApplicationContext(),retorno.getMessage(), Toast.LENGTH_SHORT).show();
 //                        startActivity(new Intent(NovoJogador.this, JogadoresActivity.class));
-                        finish();
+//                        finish();
                     }
 
                     @Override

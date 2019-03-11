@@ -1,5 +1,9 @@
 package com.pelada.panelinha.feature;
 
+import android.arch.lifecycle.Lifecycle;
+import android.arch.lifecycle.LifecycleObserver;
+import android.arch.lifecycle.LifecycleOwner;
+import android.arch.lifecycle.OnLifecycleEvent;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -68,6 +72,7 @@ public class JogadoresActivity extends AppCompatActivity {
         });
     }
 
+    @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
     private void getJogadores() {
         Call<RetornoJogador> call = new RetrofitConfig().getJogadorService().buscarJogadores();
         call.enqueue(new Callback<RetornoJogador>() {
@@ -77,7 +82,7 @@ public class JogadoresActivity extends AppCompatActivity {
                 jogadores = retorno.getResult();
 
                 for (Jogador j : jogadores) {
-                    j.setParticipa(false);
+                    j.setParticipa(true);
                 }
 
                 // specify an adapter (see also next example)

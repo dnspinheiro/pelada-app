@@ -3,4 +3,5 @@
     <string name="title_activity_peladas">Peladas</string>
     <string name="title_activity_jogadores">Jogadores</string>
     <string name="title_activity_estatistica">EstatisticaActivity</string>
+    <string name="title_activity_login">Sign in</string>
 </resources>

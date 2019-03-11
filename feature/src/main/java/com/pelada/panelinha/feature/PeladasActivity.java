@@ -1,5 +1,8 @@
 package com.pelada.panelinha.feature;
 
+import android.arch.lifecycle.Lifecycle;
+import android.arch.lifecycle.LifecycleObserver;
+import android.arch.lifecycle.OnLifecycleEvent;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -14,9 +17,12 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.pelada.panelinha.feature.adapter.PeladaAdapter;
 import com.pelada.panelinha.feature.modelo.Pelada;
 import com.pelada.panelinha.feature.modelo.RetornoPelada;
@@ -58,6 +64,7 @@ public class PeladasActivity extends AppCompatActivity {
         });
     }
 
+    @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
     private void getPeladas() {
         Call<RetornoPelada> call = new RetrofitConfig().getPeladaService().buscarPeladas();
         call.enqueue(new Callback<RetornoPelada>() {
@@ -130,5 +137,28 @@ public class PeladasActivity extends AppCompatActivity {
 
         ItemTouchHelper itemTouchhelper = new ItemTouchHelper(swipeToDeleteCallback);
         itemTouchhelper.attachToRecyclerView(recyclerView);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_peladas, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_logout) {
+            FirebaseAuth.getInstance().signOut();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }
