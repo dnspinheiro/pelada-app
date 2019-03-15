@@ -23,6 +23,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.pelada.panelinha.feature.adapter.PeladaAdapter;
 import com.pelada.panelinha.feature.modelo.Pelada;
 import com.pelada.panelinha.feature.modelo.RetornoPelada;
@@ -49,6 +50,9 @@ public class PeladasActivity extends AppCompatActivity {
         setContentView(R.layout.activity_peladas);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        FirebaseMessaging.getInstance().setAutoInitEnabled(true);
+        FirebaseMessaging.getInstance().subscribeToTopic("all");
 
         getPeladas();
         recyclerView = (RecyclerView) findViewById(R.id.rv_peladas);
@@ -156,6 +160,12 @@ public class PeladasActivity extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_logout) {
             FirebaseAuth.getInstance().signOut();
+            finish();
+            return true;
+        }
+
+        if (id == R.id.action_refresh) {
+            getPeladas();
             return true;
         }
 
